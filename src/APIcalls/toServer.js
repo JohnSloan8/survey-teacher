@@ -23,9 +23,26 @@ const createSurvey = (jsonSurveyData) => {
     language: jSD["Language"],
     story: jSD["Story"],
     sentenceSelection: jSD["How should sentences be selected"],
-    numberSentences: jSD["How many sentences in survey"]
+    numberSentences: jSD["How many sentences in survey"],
+    sentenceList: []
   };
-  console.log("surveyJSON", surveyJSON);
+
+  const createSentenceList = () => {
+    if (surveyJSON.sentenceSelection !== "random") {
+      surveyJSON.sentenceList = [
+        ...Array(parseInt(surveyJSON.numberSentences)).keys()
+      ];
+    } else {
+      let totalSentences = 25;
+      var arr = [];
+      while (arr.length < parseInt(surveyJSON.numberSentences)) {
+        var r = Math.floor(Math.random() * totalSentences) + 1;
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+      surveyJSON.sentenceList = arr;
+    }
+  };
+  createSentenceList();
   axios
     .post(
       "https://warm-reef-17230.herokuapp.com/api/v1/createSurvey",

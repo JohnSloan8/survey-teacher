@@ -25,7 +25,7 @@ const Questionnaire = () => {
         "https://api.surveyjs.io/public/Survey/getSurvey?surveyId=af7ca1cb-84ff-4005-a034-bd34ddd08c23"
       )
       .then((json) => {
-        createAudioQuestions(id);
+        createAudioQuestions(id, json.data);
         // setSurveyJSON(json.data);
         // console.log("json.data:", json.data);
         // survey = new Model(json.data);

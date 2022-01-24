@@ -15,13 +15,14 @@ const configDict = {
   Polish: polish
 };
 
-const createAudioQuestions = (surveyId) => {
+const createAudioQuestions = (surveyId, surveyBasicJSON) => {
   console.log("surveyId:", surveyId);
   axios
     .get(
       "https://warm-reef-17230.herokuapp.com/api/v1/getSurveyById/" + surveyId
     )
     .then((json) => {
+      console.log("surveyBasicJSON:", surveyBasicJSON);
       console.log("json.data.language:", configDict[json.data.language]);
     });
 };
